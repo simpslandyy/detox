@@ -105,6 +105,27 @@ async function generateDocumentation(versions, tempDir) {
     repo.cleanup(tempDir);
     console.log(`Done with ${version}\n\n`);
   }
+  throw new Error("ooops");
+}
+
+async function generate(versions, currentAttempt = 1) {
+  const maxAttempts = 3;
+  try {
+    const tempDir = fs.mkdtempSync('detox-documentation-generation');
+    await generateDocumentation(versions, tempDir)
+    await cleanUp(tempDir);
+  } catch (e) {
+    console.log("Error while generating documentation");
+    console.log(e);
+
+    await cleanUp(tempDir);
+    if (currentAttempt < maxAttempts) {
+      await generate(versions, currentAttempt + 1);
+    } else {
+      console.error(`Generation failed ${maxAttempts} times, there seems to be a real problem`);
+      process.exit(1);
+    }
+  }
 }
 
 async function cleanUp(tempDir) {
@@ -115,9 +136,7 @@ async function cleanUp(tempDir) {
 (async function() {
   const versions = await getVersions();
   await cleanupExistingVersions();
-
   fs.writeFileSync('./versions.json', JSON.stringify(versions), 'utf8');
-  const tempDir = fs.mkdtempSync('detox-documentation-generation');
-  await generateDocumentation(versions, tempDir)
-  await cleanUp(tempDir);
+
+  await generate(versions);
 })();
