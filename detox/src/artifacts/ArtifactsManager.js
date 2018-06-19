@@ -14,9 +14,8 @@ class ArtifactsManager {
     this.onResetDevice = this.onResetDevice.bind(this);
     this.onBeforeLaunchApp = this.onBeforeLaunchApp.bind(this);
     this.onLaunchApp = this.onLaunchApp.bind(this);
-    this._executeIdleCallback = this._executeIdleCallback.bind(this);
-
     this.onTerminate = _.once(this.onTerminate.bind(this));
+    this._executeIdleCallback = this._executeIdleCallback.bind(this);
 
     this._idlePromise = Promise.resolve();
     this._onIdleCallbacks = [];
@@ -123,14 +122,24 @@ class ArtifactsManager {
     this._deviceId = deviceId;
     this._bundleId = bundleId;
 
-    if (isFirstTime) {
-      this._artifactPlugins = this._artifactPluginsFactories.map((factory) => {
-        return factory(this.artifactsApi);
-      });
-    } else {
-      // TODO: implement this lifecycle event
-      // await this._emit('onBeforeRelaunchApp', [{ deviceId, bundleId }]);
-    }
+    return isFirstTime
+      ? this.onBeforeLaunchAppFirstTime({ deviceId, bundleId })
+      : this.onBeforeRelaunchApp({ deviceId, bundleId });
+  }
+
+  async onBeforeLaunchAppFirstTime({ deviceId, bundleId }) {
+    this._artifactPlugins = this._instantiateArtifactPlugins();
+    await this._emit('onBeforeLaunchApp', [{ deviceId, bundleId }]);
+  }
+
+  _instantiateArtifactPlugins() {
+    return this._artifactPluginsFactories.map((factory) => {
+      return factory(this.artifactsApi);
+    });
+  }
+
+  async onBeforeRelaunchApp({ deviceId, bundleId }) {
+    await this._emit('onBeforeRelaunchApp', [{ deviceId, bundleId }]);
   }
 
   async onLaunchApp({ deviceId, bundleId, pid }) {
@@ -140,9 +149,8 @@ class ArtifactsManager {
     this._bundleId = bundleId;
     this._pid = pid;
 
-    if (!isFirstTime) {
-      await this._emit('onRelaunchApp', [{ deviceId, bundleId, pid }]);
-    }
+    const eventName = isFirstTime ? 'onLaunchApp' : 'onRelaunchApp';
+    await this._emit(eventName, [{ deviceId, bundleId, pid }]);
   }
 
   async onBeforeAll() {
