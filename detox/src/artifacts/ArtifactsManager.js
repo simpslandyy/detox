@@ -72,7 +72,7 @@ class ArtifactsManager {
         this._activeArtifacts.push(artifact);
       },
 
-      untrackArtifact(artifact) {
+      untrackArtifact: (artifact) => {
         _.pull(this._activeArtifacts, artifact);
       },
 
