@@ -68,7 +68,6 @@
       "src/artifacts/screenshot",
       "src/artifacts/video",
       "src/artifacts/templates/plugin",
-      "src/artifacts/ArtifactsManager.js",
       ".*Driver.js",
       "EmulatorTelnet.js",
       "Emulator.js",
