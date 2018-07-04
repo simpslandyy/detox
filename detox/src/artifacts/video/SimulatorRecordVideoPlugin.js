@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const log = require('npmlog');
+const log = require('../../utils/logger');
 const tempfile = require('tempfile');
 const VideoArtifactPlugin = require('./VideoArtifactPlugin');
 const Artifact = require('../templates/artifact/Artifact');

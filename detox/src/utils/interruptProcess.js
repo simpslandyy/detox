@@ -1,4 +1,4 @@
-const log = require('npmlog');
+const log = require('./logger');
 
 async function interruptProcess(childProcessPromise, signal = 'SIGINT') {
   const process = childProcessPromise.childProcess;

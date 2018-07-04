@@ -21,9 +21,9 @@ describe('Device', () => {
 
   beforeEach(async () => {
     jest.mock('fs');
-    jest.mock('npmlog');
+    jest.mock('../utils/logger');
     fs = require('fs');
-    npmlog = require('npmlog');
+    npmlog = require('../utils/logger');
 
     Device = require('./Device');
 

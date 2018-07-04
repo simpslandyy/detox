@@ -1,5 +1,5 @@
-jest.mock('npmlog');
-const npmlog = require('npmlog');
+jest.mock('../../../utils/logger');
+const npmlog = require('../../../utils/logger');
 const ArtifactPlugin = require('./ArtifactPlugin');
 const testSummaries = require('./__mocks__/testSummaries.mock');
 

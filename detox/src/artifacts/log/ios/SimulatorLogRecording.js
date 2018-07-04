@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const fs = require('fs-extra');
-const log = require('npmlog');
+const log = require('../../../utils/logger');
 const { Tail } = require('tail');
 const Artifact = require('../../templates/artifact/Artifact');
 

@@ -5,7 +5,7 @@ describe('exec', () => {
   let cpp;
 
   beforeEach(() => {
-    jest.mock('npmlog');
+    jest.mock('./logger');
     jest.mock('child-process-promise');
     cpp = require('child-process-promise');
     exec = require('./exec');
@@ -127,11 +127,11 @@ describe('spawn', () => {
   let log;
 
   beforeEach(() => {
-    jest.mock('npmlog');
+    jest.mock('./logger');
     jest.mock('child-process-promise');
     cpp = require('child-process-promise');
     exec = require('./exec');
-    log = require('npmlog');
+    log = require('./logger');
     cpp.spawn.mockReturnValue({});
   });
 

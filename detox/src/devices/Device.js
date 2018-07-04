@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const _ = require('lodash');
-const log = require('npmlog');
+const log = require('../utils/logger');
 const argparse = require('../utils/argparse');
 const debug = require('../utils/debug'); //debug utils, leave here even if unused
 const logError = require('../utils/logError');

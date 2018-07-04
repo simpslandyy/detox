@@ -6,8 +6,8 @@ describe('logError', () => {
   let logError;
 
   beforeEach(() => {
-    jest.mock('npmlog');
-    npmlog = require('npmlog');
+    jest.mock('./logger');
+    npmlog = require('./logger');
 
     logError = require('./logError');
   });

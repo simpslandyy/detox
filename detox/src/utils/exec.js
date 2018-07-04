@@ -1,4 +1,4 @@
-const log = require('npmlog');
+const log = require('../utils/logger');
 const retry = require('../utils/retry');
 const {exec, spawn} = require('child-process-promise');
 

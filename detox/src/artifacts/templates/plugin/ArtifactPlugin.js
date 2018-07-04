@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const log = require('npmlog');
+const log = require('../../../utils/logger');
 
 /***
  * Almost non-opinionated building block for any artifact type

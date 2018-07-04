@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const log = require('npmlog');
+const log = require('../utils/logger');
 const WebSocket = require('ws');
 
 class AsyncWebSocket {

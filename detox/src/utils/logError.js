@@ -1,4 +1,4 @@
-const log = require('npmlog');
+const log = require('./logger');
 const DetoxRuntimeError = require('../errors/DetoxRuntimeError');
 
 function logError(err, prefix = 'detox') {

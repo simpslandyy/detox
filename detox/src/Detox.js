@@ -1,4 +1,4 @@
-const log = require('npmlog');
+const log = require('./utils/logger');
 const Device = require('./devices/Device');
 const IosDriver = require('./devices/IosDriver');
 const SimulatorDriver = require('./devices/SimulatorDriver');
@@ -13,9 +13,9 @@ const URL = require('url').URL;
 const _ = require('lodash');
 const ArtifactsManager = require('./artifacts/ArtifactsManager');
 
-log.level = argparse.getArgValue('loglevel') || 'info';
-log.addLevel('wss', 999, {fg: 'blue', bg: 'black'}, 'wss');
-log.heading = 'detox';
+// log.level = argparse.getArgValue('loglevel') || 'info';
+// log.addLevel('wss', 999, {fg: 'blue', bg: 'black'}, 'wss');
+// log.heading = 'detox';
 
 const DEVICE_CLASSES = {
   'ios.simulator': SimulatorDriver,
